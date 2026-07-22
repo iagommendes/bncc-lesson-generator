@@ -2,16 +2,16 @@
 
 import { useState, useTransition } from "react";
 
-import { generateLessonPlan } from "@/actions/generate-lesson-plan";
 import { EDUCATION_LEVELS, getGradesForLevel, getSubjectLabel } from "@/constants";
+import { isDemoMode } from "@/lib/demo-mode";
+import { requestLessonPlan } from "@/lib/request-lesson-plan";
 import type { LessonFormValues, LessonPlan } from "@/types/lesson";
 import { LessonForm } from "@/components/lesson/lesson-form";
 import { LessonPlanDocument } from "@/components/lesson/lesson-plan-document";
 import { PrintButton } from "@/components/lesson/print-button";
 
 /**
- * Orquestra formulário → Server Action → documento imprimível.
- * Mantém o estado no cliente; a chamada de IA fica isolada em `actions/`.
+ * Orquestra formulário → geração (demo mock ou Server Action) → documento.
  */
 export function LessonPlanner() {
   const [plan, setPlan] = useState<LessonPlan | null>(null);
@@ -22,7 +22,7 @@ export function LessonPlanner() {
   function handleSubmit(values: LessonFormValues) {
     setError(null);
     startTransition(async () => {
-      const result = await generateLessonPlan(values);
+      const result = await requestLessonPlan(values);
 
       if (!result.success) {
         setPlan(null);
@@ -61,6 +61,9 @@ export function LessonPlanner() {
           <p className="mt-1 text-sm text-muted-foreground">
             Preencha o formulário. Nos bastidores, montamos o prompt pedagógico
             completo — sem chat e sem engenharia de prompt.
+            {isDemoMode
+              ? " Nesta demo online, o plano retornado é mockado."
+              : null}
           </p>
         </div>
 

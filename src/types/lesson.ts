@@ -47,3 +47,7 @@ export type LessonPlan = {
   };
   materials: string[];
 };
+
+export type GenerateLessonPlanResult =
+  | { success: true; plan: LessonPlan }
+  | { success: false; error: string };

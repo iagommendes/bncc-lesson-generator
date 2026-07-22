@@ -8,11 +8,10 @@ import {
   buildLessonPlannerSystemPrompt,
   buildLessonPlannerUserPrompt,
 } from "@/lib/ai/system-prompt";
-import type { LessonFormValues, LessonPlan } from "@/types/lesson";
-
-export type GenerateLessonPlanResult =
-  | { success: true; plan: LessonPlan }
-  | { success: false; error: string };
+import type {
+  GenerateLessonPlanResult,
+  LessonFormValues,
+} from "@/types/lesson";
 
 /**
  * Server Action: ponto único de integração com o LLM.
