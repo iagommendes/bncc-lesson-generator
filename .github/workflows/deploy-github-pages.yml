@@ -5,14 +5,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Garante permissões do deploy-pages (OIDC + artifact).
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Evita cancelar um deploy em andamento (comum na 1ª ativação do Pages).
+  cancel-in-progress: false
 
 jobs:
   build:
