@@ -10,7 +10,9 @@ Gerador open-source de planos de aula alinhados à BNCC. O professor preenche um
 
 A demo pública usa **dados mockados** (sem chave de API), para qualquer pessoa testar o formulário, o documento A4 e a exportação PDF. No clone local com `OPENAI_API_KEY`, a geração passa a usar IA de verdade.
 
-> Após o primeiro merge em `main`, ative **Settings → Pages → Source: GitHub Actions** no repositório. O workflow `.github/workflows/deploy-github-pages.yml` publica a pasta `out/` automaticamente.
+> **GitHub Pages:** em Settings → Pages → Source, use **GitHub Actions**.
+> O workflow `.github/workflows/deploy-github-pages.yml` publica a pasta `out/` a cada push em `main`.
+> Se o primeiro deploy falhar com 404, rode de novo o workflow em **Actions → Deploy demo to GitHub Pages → Re-run** (comum na primeira ativação).
 
 ## Stack
 
