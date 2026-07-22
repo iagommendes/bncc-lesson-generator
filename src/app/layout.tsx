@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Literata, Source_Sans_3 } from "next/font/google";
 
+import { DemoBanner } from "@/components/lesson/demo-banner";
+
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -29,7 +31,10 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${sourceSans.variable} ${literata.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <DemoBanner />
+        {children}
+      </body>
     </html>
   );
 }
